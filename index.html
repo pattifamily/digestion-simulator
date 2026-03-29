@@ -7,387 +7,444 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a0a2e 100%);
+      font-family: 'Nunito', 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #1a1a3e 50%, #2d1b4e 100%);
       min-height: 100vh;
       color: #fff;
       overflow-x: hidden;
     }
+    
     h1 { 
       text-align: center; 
-      padding: 15px; 
-      font-size: 2em;
+      padding: 20px; 
+      font-size: 2.5em;
       background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+    }
+    
+    .game-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    /* Digestive System Panel */
+    .digestive-panel {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 30px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    .digestive-panel h2 {
+      text-align: center;
+      color: #aaa;
+      font-size: 1.1em;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+    
+    /* Clean Digestive System SVG */
+    .digestive-svg {
+      width: 280px;
+      height: 520px;
+    }
+    
+    /* Stats Panel */
+    .stats-panel {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 25px;
+      min-width: 280px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    .score-display {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .score-label {
+      color: #888;
+      font-size: 0.9em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    .score-value {
+      font-size: 3.5em;
+      font-weight: 800;
+      background: linear-gradient(135deg, #48dbfb, #ff9ff3);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
     
-    .game-area {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .stat-bar {
+      margin: 15px 0;
     }
     
-    .track {
-      background: linear-gradient(145deg, #2d2d44, #1f1f35);
-      border-radius: 20px;
-      padding: 15px;
-      border: 3px solid #4a4a6a;
-      position: relative;
-    }
-    
-    .track h2 {
-      font-size: 1em;
-      color: #aaa;
-      margin-bottom: 10px;
-      text-align: center;
-    }
-    
-    /* Digestive Tract Container */
-    .digestive-tract {
-      width: 320px;
-      height: 600px;
-      position: relative;
-    }
-    
-    /* Esophagus - vertical tube */
-    .esophagus {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 100px;
-      background: linear-gradient(90deg, #e74c3c, #c0392b);
-      border-radius: 20px;
-      border: 3px solid #922b21;
-      overflow: hidden;
-    }
-    
-    /* Stomach - J shape */
-    .stomach {
-      position: absolute;
-      top: 95px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 120px;
-      background: linear-gradient(180deg, #e74c3c, #c0392b);
-      border-radius: 50px 50px 80px 80px;
-      border: 3px solid #922b21;
-      overflow: hidden;
-    }
-    
-    /* Small Intestine - squiggly tube */
-    .small-intestine {
-      position: absolute;
-      top: 210px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 200px;
-      height: 200px;
-      background: transparent;
-    }
-    
-    .intestine-loop {
-      position: absolute;
-      border: 15px solid #f39c12;
-      border-radius: 50%;
-      border-top-color: transparent;
-    }
-    .loop1 { width: 80px; height: 80px; top: 0; left: 0; transform: rotate(45deg); }
-    .loop2 { width: 80px; height: 80px; top: 0; right: 0; transform: rotate(-45deg); border-left-color: transparent; }
-    .loop3 { width: 80px; height: 80px; top: 60px; left: 30px; transform: rotate(-45deg); border-right-color: transparent; }
-    .loop4 { width: 80px; height: 80px; top: 60px; right: 30px; transform: rotate(45deg); border-left-color: transparent; }
-    .loop5 { width: 80px; height: 80px; top: 120px; left: 0; transform: rotate(45deg); }
-    .loop6 { width: 80px; height: 80px; top: 120px; right: 0; transform: rotate(-45deg); border-left-color: transparent; }
-    
-    /* Large Intestine/Colon - bigger tube */
-    .large-intestine {
-      position: absolute;
-      top: 400px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 180px;
-      height: 150px;
-      border: 20px solid #a569bd;
-      border-radius: 90px;
-      border-bottom: none;
-      background: transparent;
-    }
-    
-    /* Rectum/Exit */
-    .rectum {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 30px;
-      height: 40px;
-      background: #8e44ad;
-      border-radius: 0 0 15px 15px;
-      border: 3px solid #6c3483;
-      border-top: none;
-    }
-    
-    /* Food Items */
-    .food-item {
-      position: absolute;
-      font-size: 24px;
-      transition: all 0.5s ease;
-      z-index: 10;
-      filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.5));
-    }
-    
-    .food-item.esophagus-stage {
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: swallow 2s ease-in forwards;
-    }
-    
-    .food-item.stomach-stage {
-      top: 130px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: churn 2s ease-in-out infinite;
-    }
-    
-    .food-item.intestine-stage {
-      animation: wiggle 1s ease-in-out infinite;
-    }
-    
-    @keyframes swallow {
-      0% { top: -20px; opacity: 0; }
-      20% { top: 10px; opacity: 1; }
-      50% { top: 40px; }
-      100% { top: 60px; opacity: 1; }
-    }
-    
-    @keyframes churn {
-      0%, 100% { transform: translateX(-50%) rotate(-10deg); }
-      50% { transform: translateX(-50%) rotate(10deg); }
-    }
-    
-    @keyframes wiggle {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
-    
-    /* Undigested items */
-    .undigested {
-      position: absolute;
-      font-size: 20px;
-      bottom: 5px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: exit 2s ease-in forwards;
-      opacity: 0;
-    }
-    
-    @keyframes exit {
-      0% { bottom: 50px; opacity: 0; }
-      50% { opacity: 1; }
-      100% { bottom: -10px; opacity: 1; }
-    }
-    
-    /* Stats Panel */
-    .stats {
-      background: linear-gradient(145deg, #2d2d44, #1f1f35);
-      border-radius: 20px;
-      padding: 20px;
-      border: 3px solid #4a4a6a;
-      min-width: 250px;
-    }
-    .stats h2 { color: #feca57; margin-bottom: 15px; text-align: center; }
-    .score { font-size: 2em; text-align: center; color: #48dbfb; margin-bottom: 15px; }
-    .nutrient-bar {
-      margin: 10px 0;
-    }
-    .nutrient-bar label {
+    .stat-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 5px;
-      color: #aaa;
+      margin-bottom: 8px;
+      font-size: 0.95em;
     }
+    
+    .stat-name { color: #ccc; }
+    .stat-value { color: #fff; font-weight: 600; }
+    
     .bar-bg {
-      height: 20px;
-      background: #1a1a2e;
-      border-radius: 10px;
+      height: 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
       overflow: hidden;
     }
+    
     .bar-fill {
       height: 100%;
-      border-radius: 10px;
-      transition: width 0.5s;
+      border-radius: 6px;
+      transition: width 0.4s ease;
     }
-    .energy-fill { background: linear-gradient(90deg, #f39c12, #e67e22); }
-    .protein-fill { background: linear-gradient(90deg, #e74c3c, #c0392b); }
-    .vitamins-fill { background: linear-gradient(90deg, #2ecc71, #27ae60); }
-    .fiber-fill { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
     
-    /* Food Selection */
-    .food-select {
-      background: linear-gradient(145deg, #2d2d44, #1f1f35);
-      border-radius: 20px;
-      padding: 20px;
-      border: 3px solid #4a4a6a;
-      min-width: 300px;
+    .energy { background: linear-gradient(90deg, #f39c12, #e67e22); }
+    .protein { background: linear-gradient(90deg, #e74c3c, #c0392b); }
+    .vitamins { background: linear-gradient(90deg, #2ecc71, #27ae60); }
+    .fiber { background: linear-gradient(90deg, #9b59b6, #8e44ad); }
+    
+    .poop-box {
+      background: rgba(142, 68, 173, 0.2);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      margin-top: 20px;
     }
-    .food-select h2 { color: #ff6b6b; margin-bottom: 15px; text-align: center; }
+    
+    .poop-label { color: #a569bd; font-size: 0.9em; }
+    .poop-count { font-size: 2.5em; color: #8e44ad; font-weight: 700; }
+    
+    /* Food Panel */
+    .food-panel {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 25px;
+      min-width: 320px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    .food-panel h2 {
+      text-align: center;
+      color: #ff6b6b;
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
+    
     .food-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
+    
     .food-btn {
-      padding: 15px;
-      font-size: 1.2em;
-      border: none;
+      background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      border: 2px solid rgba(255,255,255,0.15);
       border-radius: 15px;
+      padding: 15px 10px;
       cursor: pointer;
       transition: all 0.2s;
-      font-family: inherit;
-      background: linear-gradient(145deg, #667eea, #764ba2);
-      color: white;
-      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    }
-    .food-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6); }
-    .food-btn:active { transform: scale(0.95); }
-    .food-btn .points { font-size: 0.7em; opacity: 0.8; }
-    
-    /* Legend */
-    .legend {
-      background: linear-gradient(145deg, #2d2d44, #1f1f35);
-      border-radius: 20px;
-      padding: 15px;
-      border: 3px solid #4a4a6a;
-      font-size: 0.85em;
-      color: #aaa;
-      max-width: 320px;
-    }
-    .legend h3 { color: #feca57; margin-bottom: 10px; }
-    .legend-item { display: flex; align-items: center; gap: 8px; margin: 5px 0; }
-    .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
-    
-    /* Poop Tracker */
-    .poop-tracker {
-      background: linear-gradient(145deg, #2d2d44, #1f1f35);
-      border-radius: 20px;
-      padding: 15px;
-      border: 3px solid #4a4a6a;
       text-align: center;
     }
-    .poop-tracker h3 { color: #a569bd; margin-bottom: 10px; }
-    .poop-count { font-size: 2em; color: #8e44ad; }
+    
+    .food-btn:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .food-btn:active {
+      transform: translateY(0);
+    }
+    
+    .food-emoji { font-size: 2em; display: block; margin-bottom: 5px; }
+    .food-name { color: #fff; font-size: 0.85em; display: block; margin-bottom: 3px; }
+    .food-points { color: #48dbfb; font-size: 0.75em; }
+    .food-undigested { color: #ff6b6b; font-size: 0.7em; }
+    
+    /* Journey Legend */
+    .legend-panel {
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      padding: 20px;
+      margin-top: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .legend-panel h3 {
+      color: #feca57;
+      font-size: 1em;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 0.85em;
+      color: #aaa;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    
+    /* Food Animation Container */
+    .food-anim-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    
+    .anim-food {
+      position: absolute;
+      font-size: 28px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+      transition: all 0.6s ease;
+      z-index: 10;
+    }
+    
+    .anim-poop {
+      position: absolute;
+      font-size: 22px;
+      opacity: 0;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+    
+    @keyframes swallowDown {
+      0% { top: 20px; opacity: 0; transform: translateX(-50%) scale(0.5); }
+      30% { top: 70px; opacity: 1; transform: translateX(-50%) scale(1); }
+      100% { top: 110px; opacity: 1; transform: translateX(-50%) scale(1); }
+    }
+    
+    @keyframes stomachChurn {
+      0%, 100% { transform: translateX(-50%) rotate(-8deg); }
+      50% { transform: translateX(-50%) rotate(8deg); }
+    }
+    
+    @keyframes intestineMove {
+      0%, 100% { transform: translateX(-30%); }
+      50% { transform: translateX(30%); }
+    }
+    
+    @keyframes poopExit {
+      0% { opacity: 0; transform: translateX(-50%) translateY(0); }
+      30% { opacity: 1; }
+      100% { opacity: 1; transform: translateX(-50%) translateY(30px); }
+    }
+    
+    .stage-esophagus { animation: swallowDown 0.8s ease forwards; }
+    .stage-stomach { animation: stomachChurn 1s ease-in-out infinite; }
+    .stage-intestine { animation: intestineMove 0.8s ease-in-out infinite; }
+    .stage-poop { animation: poopExit 1s ease forwards; opacity: 1 !important; }
   </style>
 </head>
 <body>
-  <h1>🫃 Digestion Simulator 🌽</h1>
+  <h1>🫃 Digestion Simulator</h1>
   
-  <div class="game-area">
-    <div class="digestive-tract track">
+  <div class="game-container">
+    <!-- Digestive System -->
+    <div class="digestive-panel">
       <h2>Your Digestive System</h2>
-      
-      <div class="esophagus"></div>
-      <div class="stomach"></div>
-      <div class="small-intestine">
-        <div class="intestine-loop loop1"></div>
-        <div class="intestine-loop loop2"></div>
-        <div class="intestine-loop loop3"></div>
-        <div class="intestine-loop loop4"></div>
-        <div class="intestine-loop loop5"></div>
-        <div class="intestine-loop loop6"></div>
-      </div>
-      <div class="large-intestine"></div>
-      <div class="rectum"></div>
-      
-      <div id="food-container"></div>
-      <div id="exit-container"></div>
-    </div>
-    
-    <div>
-      <div class="stats">
-        <h2>📊 Nutrition Stats</h2>
-        <div class="score">Score: <span id="score">0</span></div>
+      <div style="position:relative;">
+        <svg class="digestive-svg" viewBox="0 0 280 520">
+          <!-- Esophagus -->
+          <path d="M130 10 L130 90 Q130 110 110 120 L110 140" 
+                fill="none" stroke="#e8a598" stroke-width="28" stroke-linecap="round"/>
+          <path d="M130 10 L130 90 Q130 110 110 120 L110 140" 
+                fill="none" stroke="#d4958a" stroke-width="20" stroke-linecap="round"/>
+          
+          <!-- Stomach -->
+          <path d="M110 140 Q60 160 60 200 Q60 260 110 270 Q160 280 170 230 Q180 180 140 150" 
+                fill="none" stroke="#c0392b" stroke-width="45" stroke-linecap="round"/>
+          <path d="M110 140 Q60 160 60 200 Q60 260 110 270 Q160 280 170 230 Q180 180 140 150" 
+                fill="none" stroke="#e74c3c" stroke-width="35" stroke-linecap="round"/>
+          
+          <!-- Liver hint -->
+          <ellipse cx="55" cy="160" rx="35" ry="25" fill="#8e44ad" opacity="0.4"/>
+          
+          <!-- Small Intestine -->
+          <path d="M140 270 
+                   Q200 280 190 320 Q180 360 140 350
+                   Q100 340 120 380 Q140 420 100 430
+                   Q60 440 90 470 Q120 490 150 480
+                   Q180 470 160 440 Q140 410 170 400" 
+                fill="none" stroke="#f39c12" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M140 270 
+                   Q200 280 190 320 Q180 360 140 350
+                   Q100 340 120 380 Q140 420 100 430
+                   Q60 440 90 470 Q120 490 150 480
+                   Q180 470 160 440 Q140 410 170 400" 
+                fill="none" stroke="#f1c40f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+          
+          <!-- Large Intestine -->
+          <path d="M50 350 Q30 350 30 400 Q30 490 100 500 Q170 510 210 480 Q230 450 230 400 Q230 340 200 320" 
+                fill="none" stroke="#9b59b6" stroke-width="35" stroke-linecap="round"/>
+          <path d="M50 350 Q30 350 30 400 Q30 490 100 500 Q170 510 210 480 Q230 450 230 400 Q230 340 200 320" 
+                fill="none" stroke="#a569bd" stroke-width="25" stroke-linecap="round"/>
+          
+          <!-- Rectum -->
+          <path d="M200 320 Q220 320 220 360 L220 480 Q220 510 200 510" 
+                fill="none" stroke="#8e44ad" stroke-width="20" stroke-linecap="round"/>
+          
+          <!-- Labels -->
+          <text x="140" y="30" fill="#888" font-size="11" text-anchor="middle">Mouth</text>
+          <text x="100" y="200" fill="#fff" font-size="11" text-anchor="middle">Stomach</text>
+          <text x="140" y="380" fill="#fff" font-size="11" text-anchor="middle">Small</text>
+          <text x="140" y="395" fill="#fff" font-size="11" text-anchor="middle">Intestine</text>
+          <text x="60" y="440" fill="#fff" font-size="11" text-anchor="middle">Large</text>
+          <text x="60" y="455" fill="#fff" font-size="11" text-anchor="middle">Intestine</text>
+          <text x="215" y="420" fill="#fff" font-size="10" text-anchor="middle">Rectum</text>
+        </svg>
         
-        <div class="nutrient-bar">
-          <label><span>⚡ Energy</span><span id="energy-val">0</span></label>
-          <div class="bar-bg"><div class="bar-fill energy-fill" id="energy-bar" style="width: 0%"></div></div>
-        </div>
-        <div class="nutrient-bar">
-          <label><span>💪 Protein</span><span id="protein-val">0</span></label>
-          <div class="bar-bg"><div class="bar-fill protein-fill" id="protein-bar" style="width: 0%"></div></div>
-        </div>
-        <div class="nutrient-bar">
-          <label><span>🥗 Vitamins</span><span id="vitamins-val">0</span></label>
-          <div class="bar-bg"><div class="bar-fill vitamins-fill" id="vitamins-bar" style="width: 0%"></div></div>
-        </div>
-        <div class="nutrient-bar">
-          <label><span>🌾 Fiber</span><span id="fiber-val">0</span></label>
-          <div class="bar-bg"><div class="bar-fill fiber-fill" id="fiber-bar" style="width: 0%"></div></div>
-        </div>
-      </div>
-      
-      <div class="poop-tracker">
-        <h3>💩 Poop Tracker</h3>
-        <div class="poop-count" id="poop-count">0</div>
-      </div>
-      
-      <div class="legend">
-        <h3>🗺️ Journey Through Your Body</h3>
-        <div class="legend-item"><div class="legend-dot" style="background:#c0392b"></div> Mouth → Esophagus</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#e74c3c"></div> Stomach (acid breaks it down)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#f39c12"></div> Small Intestine (nutrients absorbed)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#a569bd"></div> Large Intestine (water absorbed)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#8e44ad"></div> Rectum (exit!) 💩</div>
+        <div class="food-anim-container" id="animContainer"></div>
       </div>
     </div>
     
-    <div class="food-select">
+    <!-- Stats -->
+    <div class="stats-panel">
+      <div class="score-display">
+        <div class="score-label">Score</div>
+        <div class="score-value" id="score">0</div>
+      </div>
+      
+      <div class="stat-bar">
+        <div class="stat-header">
+          <span class="stat-name">⚡ Energy</span>
+          <span class="stat-value" id="energyVal">0</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill energy" id="energyBar" style="width:0%"></div></div>
+      </div>
+      
+      <div class="stat-bar">
+        <div class="stat-header">
+          <span class="stat-name">💪 Protein</span>
+          <span class="stat-value" id="proteinVal">0</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill protein" id="proteinBar" style="width:0%"></div></div>
+      </div>
+      
+      <div class="stat-bar">
+        <div class="stat-header">
+          <span class="stat-name">🥗 Vitamins</span>
+          <span class="stat-value" id="vitaminsVal">0</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill vitamins" id="vitaminsBar" style="width:0%"></div></div>
+      </div>
+      
+      <div class="stat-bar">
+        <div class="stat-header">
+          <span class="stat-name">🌾 Fiber</span>
+          <span class="stat-value" id="fiberVal">0</span>
+        </div>
+        <div class="bar-bg"><div class="bar-fill fiber" id="fiberBar" style="width:0%"></div></div>
+      </div>
+      
+      <div class="poop-box">
+        <div class="poop-label">💩 Poop Count</div>
+        <div class="poop-count" id="poopCount">0</div>
+      </div>
+      
+      <div class="legend-panel">
+        <h3>🗺️ Journey</h3>
+        <div class="legend-row"><div class="legend-color" style="background:#d4958a"></div> Mouth → Esophagus</div>
+        <div class="legend-row"><div class="legend-color" style="background:#e74c3c"></div> Stomach (acid dissolves it)</div>
+        <div class="legend-row"><div class="legend-color" style="background:#f1c40f"></div> Small Intestine (nutrients absorbed)</div>
+        <div class="legend-row"><div class="legend-color" style="background:#a569bd"></div> Large Intestine (water absorbed)</div>
+        <div class="legend-row"><div class="legend-color" style="background:#8e44ad"></div> Rectum (exit!) 💩</div>
+      </div>
+    </div>
+    
+    <!-- Food Selection -->
+    <div class="food-panel">
       <h2>🍽️ Choose Your Food!</h2>
       <div class="food-grid">
-        <button class="food-btn" onclick="eatFood('🍎', 'Apple', 15, 2, 25, 5)">
-          🍎 Apple<br><span class="points">+15 pts</span>
+        <button class="food-btn" onclick="eatFood('🍎','Apple',15,2,25,5)">
+          <span class="food-emoji">🍎</span>
+          <span class="food-name">Apple</span>
+          <span class="food-points">+15 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🥕', 'Carrot', 10, 3, 30, 8)">
-          🥕 Carrot<br><span class="points">+10 pts</span>
+        <button class="food-btn" onclick="eatFood('🥕','Carrot',10,3,30,8)">
+          <span class="food-emoji">🥕</span>
+          <span class="food-name">Carrot</span>
+          <span class="food-points">+10 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🍗', 'Chicken', 20, 40, 10, 0)">
-          🍗 Chicken<br><span class="points">+20 pts</span>
+        <button class="food-btn" onclick="eatFood('🍗','Chicken',20,40,10,0)">
+          <span class="food-emoji">🍗</span>
+          <span class="food-name">Chicken</span>
+          <span class="food-points">+20 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🍞', 'Bread', 25, 8, 5, 3)">
-          🍞 Bread<br><span class="points">+25 pts</span>
+        <button class="food-btn" onclick="eatFood('🍞','Bread',25,8,5,3)">
+          <span class="food-emoji">🍞</span>
+          <span class="food-name">Bread</span>
+          <span class="food-points">+25 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🥚', 'Egg', 15, 30, 10, 0)">
-          🥚 Egg<br><span class="points">+15 pts</span>
+        <button class="food-btn" onclick="eatFood('🥚','Egg',15,30,10,0)">
+          <span class="food-emoji">🥚</span>
+          <span class="food-name">Egg</span>
+          <span class="food-points">+15 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🍌', 'Banana', 18, 5, 20, 5)">
-          🍌 Banana<br><span class="points">+18 pts</span>
+        <button class="food-btn" onclick="eatFood('🍌','Banana',18,5,20,5)">
+          <span class="food-emoji">🍌</span>
+          <span class="food-name">Banana</span>
+          <span class="food-points">+18 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🥦', 'Broccoli', 8, 8, 35, 10)">
-          🥦 Broccoli<br><span class="points">+8 pts</span>
+        <button class="food-btn" onclick="eatFood('🥦','Broccoli',8,8,35,10)">
+          <span class="food-emoji">🥦</span>
+          <span class="food-name">Broccoli</span>
+          <span class="food-points">+8 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🌽', 'Corn', 12, 4, 5, 15)">
-          🌽 Corn<br><span class="points">NOT DIGESTED!</span>
+        <button class="food-btn" onclick="eatFood('🌽','Corn',12,4,5,15)">
+          <span class="food-emoji">🌽</span>
+          <span class="food-name">Corn</span>
+          <span class="food-undigested">UNDIGESTED!</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🥩', 'Steak', 25, 45, 5, 0)">
-          🥩 Steak<br><span class="points">+25 pts</span>
+        <button class="food-btn" onclick="eatFood('🥩','Steak',25,45,5,0)">
+          <span class="food-emoji">🥩</span>
+          <span class="food-name">Steak</span>
+          <span class="food-points">+25 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🍪', 'Cookie', 30, 3, 2, 2)">
-          🍪 Cookie<br><span class="points">+30 pts</span>
+        <button class="food-btn" onclick="eatFood('🍪','Cookie',30,3,2,2)">
+          <span class="food-emoji">🍪</span>
+          <span class="food-name">Cookie</span>
+          <span class="food-points">+30 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🥛', 'Milk', 15, 10, 15, 0)">
-          🥛 Milk<br><span class="points">+15 pts</span>
+        <button class="food-btn" onclick="eatFood('🥛','Milk',15,10,15,0)">
+          <span class="food-emoji">🥛</span>
+          <span class="food-name">Milk</span>
+          <span class="food-points">+15 pts</span>
         </button>
-        <button class="food-btn" onclick="eatFood('🫐', 'Blueberries', 10, 3, 25, 8)">
-          🫐 Blueberries<br><span class="points">+10 pts</span>
+        <button class="food-btn" onclick="eatFood('🫐','Blueberries',10,3,25,8)">
+          <span class="food-emoji">🫐</span>
+          <span class="food-name">Blueberries</span>
+          <span class="food-points">+10 pts</span>
         </button>
       </div>
     </div>
@@ -397,141 +454,130 @@
     let score = 0;
     let energy = 0, protein = 0, vitamins = 0, fiber = 0;
     let poopCount = 0;
-    let foodQueue = [];
+    let queue = [];
     
-    const foodInfo = {
-      '🍎': { name: 'Apple', energy: 15, protein: 2, vitamins: 25, fiber: 5 },
-      '🥕': { name: 'Carrot', energy: 10, protein: 3, vitamins: 30, fiber: 8 },
-      '🍗': { name: 'Chicken', energy: 20, protein: 40, vitamins: 10, fiber: 0 },
-      '🍞': { name: 'Bread', energy: 25, protein: 8, vitamins: 5, fiber: 3 },
-      '🥚': { name: 'Egg', energy: 15, protein: 30, vitamins: 10, fiber: 0 },
-      '🍌': { name: 'Banana', energy: 18, protein: 5, vitamins: 20, fiber: 5 },
-      '🥦': { name: 'Broccoli', energy: 8, protein: 8, vitamins: 35, fiber: 10 },
-      '🌽': { name: 'Corn', energy: 12, protein: 4, vitamins: 5, fiber: 15, undigested: true },
-      '🥩': { name: 'Steak', energy: 25, protein: 45, vitamins: 5, fiber: 0 },
-      '🍪': { name: 'Cookie', energy: 30, protein: 3, vitamins: 2, fiber: 2 },
-      '🥛': { name: 'Milk', energy: 15, protein: 10, vitamins: 15, fiber: 0 },
-      '🫐': { name: 'Blueberries', energy: 10, protein: 3, vitamins: 25, fiber: 8 }
+    const foods = {
+      '🍎': { name: 'Apple', e: 15, p: 2, v: 25, f: 5 },
+      '🥕': { name: 'Carrot', e: 10, p: 3, v: 30, f: 8 },
+      '🍗': { name: 'Chicken', e: 20, p: 40, v: 10, f: 0 },
+      '🍞': { name: 'Bread', e: 25, p: 8, v: 5, f: 3 },
+      '🥚': { name: 'Egg', e: 15, p: 30, v: 10, f: 0 },
+      '🍌': { name: 'Banana', e: 18, p: 5, v: 20, f: 5 },
+      '🥦': { name: 'Broccoli', e: 8, p: 8, v: 35, f: 10 },
+      '🌽': { name: 'Corn', e: 12, p: 4, v: 5, f: 15, undigested: true },
+      '🥩': { name: 'Steak', e: 25, p: 45, v: 5, f: 0 },
+      '🍪': { name: 'Cookie', e: 30, p: 3, v: 2, f: 2 },
+      '🥛': { name: 'Milk', e: 15, p: 10, v: 15, f: 0 },
+      '🫐': { name: 'Blueberries', e: 10, p: 3, v: 25, f: 8 }
     };
     
     function updateStats() {
       document.getElementById('score').textContent = score;
-      document.getElementById('energy-val').textContent = energy;
-      document.getElementById('protein-val').textContent = protein;
-      document.getElementById('vitamins-val').textContent = vitamins;
-      document.getElementById('fiber-val').textContent = fiber;
-      document.getElementById('poop-count').textContent = poopCount;
+      document.getElementById('energyVal').textContent = energy;
+      document.getElementById('proteinVal').textContent = protein;
+      document.getElementById('vitaminsVal').textContent = vitamins;
+      document.getElementById('fiberVal').textContent = fiber;
+      document.getElementById('poopCount').textContent = poopCount;
       
-      document.getElementById('energy-bar').style.width = Math.min(energy, 100) + '%';
-      document.getElementById('protein-bar').style.width = Math.min(protein, 100) + '%';
-      document.getElementById('vitamins-bar').style.width = Math.min(vitamins, 100) + '%';
-      document.getElementById('fiber-bar').style.width = Math.min(fiber, 100) + '%';
+      document.getElementById('energyBar').style.width = Math.min(energy, 100) + '%';
+      document.getElementById('proteinBar').style.width = Math.min(protein, 100) + '%';
+      document.getElementById('vitaminsBar').style.width = Math.min(vitamins, 100) + '%';
+      document.getElementById('fiberBar').style.width = Math.min(fiber, 100) + '%';
     }
     
     function eatFood(emoji, name, e, p, v, f) {
-      const info = foodInfo[emoji];
-      const id = Date.now();
+      const info = foods[emoji];
+      const id = Date.now() + Math.random();
       
-      foodQueue.push({
+      queue.push({
         id,
         emoji,
-        name,
         info,
-        stage: 'esophagus',
+        stage: 0,
         undigested: info.undigested || false
       });
       
-      renderFood();
-      
-      if (foodQueue.length === 1) {
-        processDigestion();
-      }
+      renderQueue();
+      if (queue.length === 1) processDigestion();
     }
     
-    function renderFood() {
-      const container = document.getElementById('food-container');
-      const exitContainer = document.getElementById('exit-container');
+    function renderQueue() {
+      const container = document.getElementById('animContainer');
       
-      // Render active food items
-      container.innerHTML = foodQueue
-        .filter(f => f.stage !== 'exited')
-        .map(f => {
-          let style = '';
-          let left = '50%';
-          let top = '30px';
-          
-          if (f.stage === 'esophagus') {
-            top = '30px';
-          } else if (f.stage === 'stomach') {
-            top = '130px';
-            if (f.undigested) {
-              // Corn stays whole in stomach
-              top = '160px';
-            }
-          } else if (f.stage === 'small-intestine') {
-            top = '280px';
-            left = (30 + Math.random() * 60) + '%';
-          } else if (f.stage === 'large-intestine') {
-            top = '450px';
-            left = (20 + Math.random() * 60) + '%';
-          } else if (f.stage === 'rectum') {
-            top = '560px';
-          }
-          
-          return `<div class="food-item" style="left:${left};top:${top};transform:translateX(-50%)">${f.emoji}</div>`;
-        })
-        .join('');
+      // Clear old animations
+      container.innerHTML = '';
       
-      // Render exited (poop) items
-      exitContainer.innerHTML = foodQueue
-        .filter(f => f.stage === 'exited')
-        .map(f => `<div class="undigested">${f.emoji}</div>`)
-        .join('');
+      queue.forEach((item, idx) => {
+        const div = document.createElement('div');
+        div.className = 'anim-food';
+        div.textContent = item.emoji;
+        div.id = 'food-' + item.id;
+        
+        // Position based on stage
+        let top, left = '50%';
+        
+        if (item.stage === 0) { // Mouth/esophagus
+          top = 30 + (idx * 25);
+          div.classList.add('stage-esophagus');
+        } else if (item.stage === 1) { // Stomach
+          top = 160;
+          left = '38%';
+          div.classList.add('stage-stomach');
+        } else if (item.stage === 2) { // Small intestine
+          top = 300 + (idx * 20);
+          left = (40 + idx * 15) + '%';
+          div.classList.add('stage-intestine');
+        } else if (item.stage === 3) { // Large intestine
+          top = 430;
+          left = (25 + idx * 20) + '%';
+        } else if (item.stage === 4) { // Rectum/exiting
+          top = 480;
+          left = '78%';
+          div.classList.add('stage-poop');
+        }
+        
+        div.style.left = left;
+        div.style.top = top + 'px';
+        div.style.transform = 'translateX(-50%)';
+        
+        container.appendChild(div);
+      });
     }
     
     function processDigestion() {
-      const current = foodQueue.find(f => f.stage !== 'exited');
+      const current = queue.find(q => q.stage < 5);
       if (!current) return;
       
-      // Esophagus → Stomach (2 seconds)
-      if (current.stage === 'esophagus') {
-        current.stage = 'stomach';
-        renderFood();
-        setTimeout(processDigestion, 2000);
-      }
-      // Stomach (3 seconds, churns)
-      else if (current.stage === 'stomach') {
-        current.stage = 'small-intestine';
-        if (!current.undigested) {
-          score += current.info.energy + current.info.protein + current.info.vitamins + current.info.fiber;
-          energy += current.info.energy;
-          protein += current.info.protein;
-          vitamins += current.info.vitamins;
-          fiber += current.info.fiber;
-        }
+      // Progress to next stage
+      current.stage++;
+      renderQueue();
+      
+      // Add nutrients when digested in stomach
+      if (current.stage === 2 && !current.undigested) {
+        const info = current.info;
+        score += info.e + info.p + info.v + info.f;
+        energy += info.e;
+        protein += info.p;
+        vitamins += info.v;
+        fiber += info.f;
         updateStats();
-        renderFood();
-        setTimeout(processDigestion, 3000);
       }
-      // Small Intestine (3 seconds)
-      else if (current.stage === 'small-intestine') {
-        current.stage = 'large-intestine';
-        renderFood();
-        setTimeout(processDigestion, 3000);
-      }
-      // Large Intestine (3 seconds, water absorbed)
-      else if (current.stage === 'large-intestine') {
-        current.stage = 'rectum';
-        renderFood();
-        setTimeout(processDigestion, 2500);
-      }
-      // Rectum → Exit!
-      else if (current.stage === 'rectum') {
-        current.stage = 'exited';
-        poopCount++;
-        updateStats();
-        renderFood();
-        setTimeout(processDigestion, 500);
+      
+      // Timings for each stage
+      const timings = [800, 2500, 3000, 2500, 1500];
+      const delay = timings[current.stage - 1] || 1500;
+      
+      // Handle poop exit
+      if (current.stage === 5) {
+        setTimeout(() => {
+          poopCount++;
+          updateStats();
+          queue = queue.filter(q => q.id !== current.id);
+          renderQueue();
+          processDigestion();
+        }, delay);
+      } else {
+        setTimeout(processDigestion, delay);
       }
     }
   </script>
